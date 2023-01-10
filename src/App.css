@@ -1,5 +1,4 @@
 .wallpaper{
-    width: 100%;
     height: 240px;
     border-radius:10px ;
     margin-bottom: 24px;
@@ -8,4 +7,10 @@
 
   padding-top:80px ;
   text-align: end;
+}
+.MobileWallpaper{
+    height: 500px;
+    border-radius:10px ;
+    margin-bottom: 24px;
+
 }
