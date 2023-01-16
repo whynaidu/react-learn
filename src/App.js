@@ -13,7 +13,7 @@ function App() {
       <Gallery />
      
 
-    <MobileGallery />
+    {/* <MobileGallery /> */}
 
 
     </div>

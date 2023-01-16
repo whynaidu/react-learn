@@ -5,12 +5,12 @@ const mongoose = require('mongoose');
 const dotenv = require("dotenv");
 const multer = require('multer');
 const path = require('path');
-    
-
+const cors=require('cors');
 
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false})); 
+app.use(bodyParser.urlencoded({ extended: false })); 
+app.use(cors())
 require('./db/conn')
 dotenv.config({ path: "./config.env" });
 
@@ -37,7 +37,7 @@ const PORT = process.env.PORT
 
 
 const Storage = multer.diskStorage({
-    destination: "uploads",
+    destination: "../src/components/uploads",
     filename: (req, file, cb) => {
         return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
     }
@@ -87,10 +87,21 @@ app.post("/upload", upload.single('wallpaper'), (req, res) => {
 // })
 
 
+
+
 app.get('/wallpaper/:category', async (req, res) => {
 
     
     const data = await wallpaper.find({ category: req.params.category }, {});
+    console.log(data);
+    res.send(data);
+
+});
+
+app.get('/', async (req, res) => {
+
+    
+    const data = await wallpaper.find({ category: "desktop" }, {});
     console.log(data);
     res.send(data);
 
