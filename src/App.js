@@ -1,13 +1,15 @@
-// import Header from './components/header';
-import './App.css';
-// import Gallery from './components/desktopGallery';
-// import MobileGallery from './components/mobileGallery';
-import ImageView from './components/imageView';
+import "./App.css";
+import Gallery from "./components/desktopGallery";
+import ImageView from "./components/imageView";
+import { Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <ImageView />
+      <Switch>
+        <Route exact path="/" element={<Gallery />} />
+        <Route path="/large" element={<ImageView />} />
+      </Switch>
     </div>
   );
 }
