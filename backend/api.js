@@ -37,7 +37,7 @@ const PORT = process.env.PORT
 
 
 const Storage = multer.diskStorage({
-    destination: "../src/components/uploads",
+    destination: "../public/uploads",
     filename: (req, file, cb) => {
         return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
     }
@@ -89,7 +89,7 @@ app.post("/upload", upload.single('wallpaper'), (req, res) => {
 
 
 
-app.get('/wallpaper/:category', async (req, res) => {
+app.get('/:category', async (req, res) => {
 
     
     const data = await wallpaper.find({ category: req.params.category }, {});

@@ -14,3 +14,17 @@
     margin-bottom: 24px;
 
 }
+.main{
+  padding: 3%;
+  height: 750px;
+}
+
+.imageView{
+  padding:0;
+  width: 100%;
+  border: 1px solid;
+  box-shadow: 5px 10px; 
+  border-radius: 70px;
+  background-color: aqua;
+  height: 660px;
+}

@@ -3,39 +3,43 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
-import wallpaper1 from '../img/mobile/@wallpaperx_app_1051.jpg'
-import wallpaper2 from '../img/mobile/@wallpaperx_app_1056.jpg'
-
-import wallpaper3 from '../img/mobile/@wallpaperx_app_1057.jpg'
-import wallpaper4 from '../img/mobile/@wallpaperx_app_1063.jpg'
-import wallpaper5 from '../img/mobile/@wallpaperx_app_1066.jpg'
-
-import wallpaper6 from '../img/mobile/@wallpaperx_app_1068.jpg'
+import axios from "axios"
 
 export default class MobileGallery extends Component {
+
+
+    constructor() {
+    super();
+    this.state = {
+      Apidata:[]
+    }
+  }
+
+  componentDidMount () { 
+    const getData = async() => {
+      const res = await axios.get("http://localhost:3001/mobile")
+      const data = await res.data;
+      console.log(res.data)
+      this.setState({ Apidata: data })
+    }
+    getData();
+   }
   render() {
     return (
         <div>
             <Container>
-              <Row className='Mobilegallery'>
+          <Row className='Mobilegallery'>
+            
+             {
+              this.state.Apidata.map((elem, key) => {
+                
+                return (
                      <Col xs={6} md={2}>
-                        <Card.Img className='MobileWallpaper' variant="top" src={wallpaper1} />
+                        <Card.Img className='MobileWallpaper' variant="top" src={`../../uploads/${elem.wallpaper_url}`} />
                     </Col>
-                    <Col xs={6} md={2}>
-                        <Card.Img className='MobileWallpaper' variant="top" src={wallpaper2} />
-                    </Col>
-                    <Col xs={6} md={2}>
-                        <Card.Img className='MobileWallpaper' variant="top" src={wallpaper3} />
-            </Col>
-            <Col xs={6} md={2}>
-                        <Card.Img className='MobileWallpaper' variant="top" src={wallpaper4} />
-            </Col>
-            <Col xs={6} md={2}>
-                        <Card.Img className='MobileWallpaper' variant="top" src={wallpaper5} />
-            </Col>
-            <Col xs={6} md={2}>
-                        <Card.Img className='MobileWallpaper' variant="top" src={wallpaper6} />
-                    </Col>
+                     )
+              })
+            }
                     
                    
             
