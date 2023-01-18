@@ -6,8 +6,14 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
-import { withRouter } from "react-router";
+// import Gallery from "./desktopGallery"
+import { Link } from "react-router-dom"
+ import withRouter from "./withRouter";
 
+
+// function withParams(Component) {
+//   return (props) => <Component {...props} params={useParams()} />;
+// }
 class ImageView extends Component {
   constructor() {
     super();
@@ -15,9 +21,8 @@ class ImageView extends Component {
       Apidata: [],
     };
   }
-
   componentDidMount() {
-    const id = this.props.match.params.id;
+    const id = "63c6430e1f0e4e2d2ec6d715";
     this.getData(id);
   }
 
@@ -27,30 +32,31 @@ class ImageView extends Component {
     this.setState({ Apidata: data });
   };
   render() {
+
     return (
       <div>
         <Container className="main">
           <Row style={{ padding: 0 }}>
-            {this.state.Apidata.map((elem, key) => {
-              return (
-                <>
-                  <img
-                    key={key}
-                    className="imageView"
-                    src={`../../uploads/${elem.wallpaper_url}`}
-                    alt="wallpaper"
-                  />
-                </>
-              );
-            })}
-            <Row className="justify-content-center wallpaper_tool">
-              <Button variant="light" className="download" size="lg">
-                <FontAwesomeIcon icon={faClose} size="2x" />
-              </Button>
+            <img
+              className="imageView"
+              src={`../../uploads/${this.props.params.wallpaper_url}`}
+              alt="wallpaper"
+            />
+            <Row className="wallpaper_tool">
+              <Link to="/">
+                <Button variant="light" className="download" size="lg">
+                  <FontAwesomeIcon icon={faClose} size="2x" />
+                </Button>
+              </Link>
 
-              <Button variant="light" className="download" size="lg">
-                <FontAwesomeIcon icon={faDownload} size="2x" />
-              </Button>
+              <a
+                href={`../../uploads/${this.props.params.wallpaper_url}`}
+                download
+              >
+                <Button variant="light" className="download" size="lg">
+                  <FontAwesomeIcon icon={faDownload} size="2x" />
+                </Button>
+              </a>
             </Row>
           </Row>
         </Container>

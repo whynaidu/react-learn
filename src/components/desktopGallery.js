@@ -4,7 +4,10 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import Header from "./header";
+// import Button from "react-bootstrap/Button";
+// import Modal from "react-bootstrap/Modal";
+ import { Link } from "react-router-dom";
 
 export default class Gallery extends Component {
   constructor() {
@@ -26,15 +29,15 @@ export default class Gallery extends Component {
   render() {
     return (
       <div>
+        <Header />
         <Container>
           <Row className="gallery">
             {this.state.Apidata.map((elem, key) => {
               return (
                 <Col xs={6} md={4} key={key}>
-                  <Link to={`large/${elem._id}`}>
+                  <Link to={`view/${elem.wallpaper_url}`}>
                     <Card.Img
                       className="wallpaper"
-                      onClick={() => navigate(elem._id)}
                       variant="top"
                       src={`../../uploads/${elem.wallpaper_url}`}
                     />
