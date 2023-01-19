@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
+// import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
@@ -13,22 +13,22 @@ import withRouter from "./withRouter";
 //   return (props) => <Component {...props} params={useParams()} />;
 // }
 class MobileView extends Component {
-  constructor() {
-    super();
-    this.state = {
-      Apidata: [],
-    };
-  }
-  componentDidMount() {
-    const id = "63c6430e1f0e4e2d2ec6d715";
-    this.getData(id);
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     Apidata: [],
+  //   };
+  // }
+  // componentDidMount() {
+  //   const id = "63c6430e1f0e4e2d2ec6d715";
+  //   this.getData(id);
+  // }
 
-  getData = async (id) => {
-    const res = await axios.get(`http://localhost:3001/view/${id}`);
-    const data = await res.data;
-    this.setState({ Apidata: data });
-  };
+  // getData = async (id) => {
+  //   const res = await axios.get(`http://localhost:3001/view/${id}`);
+  //   const data = await res.data;
+  //   this.setState({ Apidata: data });
+  // };
   render() {
     return (
       <div>

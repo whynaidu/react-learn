@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
+// import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
@@ -30,6 +30,7 @@ class ImageView extends Component {
 
     return (
       <div>
+        
         <Container className="main">
           <Row className="justify-content-center" style={{ padding: 0 }}>
             <img

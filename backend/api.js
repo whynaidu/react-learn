@@ -6,7 +6,6 @@ const dotenv = require("dotenv");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
@@ -49,14 +48,13 @@ app.post("/upload", upload.single("wallpaper"), (req, res) => {
   const newwallpaper = new wallpaper({
     name: req.body.name,
     category: req.body.category,
-    wallpaper_url: `${req.file.filename}`,
+    //  wallpaper_url: `${req.file.filename}`,
   });
   newwallpaper
     .save()
     .then(() => res.send("uploaded"))
-    .catch((err) => console.log(err));
+    .catch((err));
 });
-
 
 app.get("/:category", async (req, res) => {
   const data = await wallpaper.find({ category: req.params.category });
@@ -75,9 +73,9 @@ app.get("/view/:id", async (req, res) => {
 
 app.get("/", async (req, res) => {
   const data = await wallpaper.find({ category: "desktop" });
-  console.log(data);
   res.send(data);
 });
+
 
 app.post("/deleteall", async (req, res) => {
   const data = await wallpaper.deleteMany();
