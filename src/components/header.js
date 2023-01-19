@@ -48,6 +48,7 @@ class Header extends Component {
     this.state = {
       name: "",
       category: "",
+      filename: "",
       showModal: false,
     };
   }
@@ -55,22 +56,21 @@ class Header extends Component {
   handleInputChanged(event) {
     this.setState({
       name: event.target.value,
-      category: event.target.value,
     });
   }
 
   handleButtonClicked = (event) => {
     event.preventDefault();
-    const { name, category } = this.state;
+    const { name, category, filename } = this.state;
     axios
-      .post(`http://localhost:3001/upload`, { name, category })
+      .post(`http://localhost:3001/upload`, { name, category, filename })
       .then((res) => {
         toast.success("Submitted successfully");
       })
       .catch((err) => {
         toast.error("Submission Failed");
       });
-     this.closeModal();
+    this.closeModal();
   };
 
   handleradio = (e) => {
@@ -79,15 +79,27 @@ class Header extends Component {
     });
   };
 
+  handleFile = (event) => {
+    console.log(event.target.file[0]);
+  };
+ 
+  // handleFile = (e) => {
+  //   this.setState({
+  //     fileName: e.target.files[0],
+  //   });
+  //   console.log(this.state.fileName[0]);
+  // };
+
   openModal = () => this.setState({ showModal: true });
-  
-  closeModal = () => this.setState({ showModal: false }, () => {
-    this.setState({
-      name: "",
-      category: ""
+
+  closeModal = () =>
+    this.setState({ showModal: false }, () => {
+      this.setState({
+        name: "",
+        category: "",
+        filename: "",
+      });
     });
-  }
-  );
 
   render() {
     const path = this.props.location;
@@ -181,7 +193,12 @@ class Header extends Component {
                     Select file
                   </Form.Label>
                   <Col sm={9}>
-                    <Form.Control type="file" placeholder="Email" />
+                    <Form.Control
+                      type="file"
+                      name="file"
+                      onChange={this.handlFile}
+                      placeholder="Email"
+                    />
                   </Col>
                 </Form.Group>
               </Modal.Body>
@@ -189,7 +206,11 @@ class Header extends Component {
                 <Button variant="secondary" onClick={this.closeModal}>
                   Close
                 </Button>
-                <Button type="submit" variant="dark" onClick={this.handleButtonClicked}>
+                <Button
+                  type="submit"
+                  variant="dark"
+                  onClick={this.handleButtonClicked}
+                >
                   Upload
                 </Button>
               </Modal.Footer>

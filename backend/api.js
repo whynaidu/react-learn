@@ -48,7 +48,7 @@ app.post("/upload", upload.single("wallpaper"), (req, res) => {
   const newwallpaper = new wallpaper({
     name: req.body.name,
     category: req.body.category,
-    //  wallpaper_url: `${req.file.filename}`,
+    wallpaper_url: `${req.file.filename}`,
   });
   newwallpaper
     .save()
