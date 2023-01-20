@@ -48,7 +48,7 @@ class Header extends Component {
     this.state = {
       name: "",
       category: "",
-      filename: "",
+      wallls: "",
       showModal: false,
     };
   }
@@ -59,30 +59,40 @@ class Header extends Component {
     });
   }
 
-  handleButtonClicked = (event) => {
-    event.preventDefault();
-    const { name, category, filename } = this.state;
+  handleButtonClicked = (click) => {
+    click.preventDefault();
+    const formData = new FormData();
+    formData.append("wallls", this.state.wallls);
+    formData.append("name", this.state.name);
+    formData.append("category", this.state.category);
+
     axios
-      .post(`http://localhost:3001/upload`, { name, category, filename })
+      .post(`http://localhost:3001/upload`, formData)
       .then((res) => {
-        toast.success("Submitted successfully");
+        toast.success(res.data);
+        console.log(res);
       })
       .catch((err) => {
-        toast.error("Submission Failed");
+        toast.error(err);
       });
     this.closeModal();
   };
 
   handleradio = (e) => {
+    this.setState(
+      {
+        category: e.target.value,
+      },
+      () => console.log(this.state.category)
+    );
+  };
+
+  handleFile = (click) => {
     this.setState({
-      category: e.target.value,
+      wallls: click.target.files[0],
     });
   };
 
-  handleFile = (event) => {
-    console.log(event.target.file[0]);
-  };
- 
   // handleFile = (e) => {
   //   this.setState({
   //     fileName: e.target.files[0],
@@ -97,12 +107,11 @@ class Header extends Component {
       this.setState({
         name: "",
         category: "",
-        filename: "",
+        wallss: "",
       });
     });
 
   render() {
-    const path = this.props.location;
     return (
       <div>
         <div className="form-group">
@@ -131,15 +140,28 @@ class Header extends Component {
               size="3x"
             />
 
-            <Link to="/mobile"> </Link>
+            <Link to="/mobile">
+              <FontAwesomeIcon
+                style={{ color: "black", margin: 10, cursor: "pointer" }}
+                onClick={this.openModal}
+                icon={faMobile}
+                size="3x"
+              />
+            </Link>
           </Col>
           <Col sm={1} md={1} xs={0}></Col>
 
-          <Modal show={this.state.showModal} onHide={this.closeModal}>
+          <Modal
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={this.state.showModal}
+            onHide={this.closeModal}
+          >
             <Modal.Header closeButton>
               <Modal.Title>Upload Wallpaper</Modal.Title>
             </Modal.Header>
-            <Form>
+            <Form encType="mutipart/form-data">
               <Modal.Body>
                 <Form.Group
                   as={Row}
@@ -163,22 +185,26 @@ class Header extends Component {
 
                 <fieldset>
                   <Form.Group as={Row} className="mb-3">
-                    <Form.Label as="legend" column sm={2}>
+                    <Form.Label as="legend" column sm={3}>
                       Category
                     </Form.Label>
-                    <Col sm={10} onChange={this.handleradio}>
+                    <Col
+                      sm={9}
+                      style={{ display: "flex" }}
+                      onChange={this.handleradio}
+                    >
                       <Form.Check
                         type="radio"
                         label="Mobile"
                         name="category"
-                        value="Mobile"
+                        value="mobile"
                         id="formHorizontalRadios1"
                       />
                       <Form.Check
                         type="radio"
                         label="Desktop"
                         name="category"
-                        value="Desktop"
+                        value="desktop"
                         id="formHorizontalRadios2"
                       />
                     </Col>
@@ -194,15 +220,15 @@ class Header extends Component {
                   </Form.Label>
                   <Col sm={9}>
                     <Form.Control
+                      required
                       type="file"
                       name="file"
-                      onChange={this.handlFile}
-                      placeholder="Email"
+                      onChange={this.handleFile}
                     />
                   </Col>
                 </Form.Group>
               </Modal.Body>
-              <Modal.Footer>
+              <Modal.Footer style={{ justifyContent: "center" }}>
                 <Button variant="secondary" onClick={this.closeModal}>
                   Close
                 </Button>

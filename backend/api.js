@@ -25,8 +25,7 @@ const wallpaperschema = new mongoose.Schema({
   },
 });
 
-const wallpaper = mongoose.model("wals", wallpaperschema);
-module.exports = wallpaper;
+const Wallpaper = mongoose.model("wals", wallpaperschema);
 
 const PORT = process.env.PORT;
 
@@ -44,41 +43,38 @@ const upload = multer({
   storage: Storage,
 });
 
-app.post("/upload", upload.single("wallpaper"), (req, res) => {
-  const newwallpaper = new wallpaper({
+
+app.post("/upload", upload.single("wallls"), (req, res) => {
+  const newwallpaper = new Wallpaper({
     name: req.body.name,
     category: req.body.category,
-    wallpaper_url: `${req.file.filename}`,
+    wallpaper_url: req.file.filename,
   });
   newwallpaper
     .save()
-    .then(() => res.send("uploaded"))
-    .catch((err));
+    .then(() => res.send("WallPaper Uploaded"))
+    .catch((err) => res.send(err));
 });
 
 app.get("/:category", async (req, res) => {
-  const data = await wallpaper.find({ category: req.params.category });
+  const data = await Wallpaper.find({ category: req.params.category });
   console.log(data);
   res.send(data);
 });
-
 
 app.get("/view/:id", async (req, res) => {
-  const data = await wallpaper.find({ _id: req.params.id });
+  const data = await Wallpaper.find({ _id: req.params.id });
   console.log(data);
   res.send(data);
-
 });
 
-
 app.get("/", async (req, res) => {
-  const data = await wallpaper.find({ category: "desktop" });
+  const data = await Wallpaper.find({ category: "desktop" });
   res.send(data);
 });
 
-
 app.post("/deleteall", async (req, res) => {
-  const data = await wallpaper.deleteMany();
+  const data = await Wallpaper.deleteMany();
   console.log(data);
   res.send(data);
 });

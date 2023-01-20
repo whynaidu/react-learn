@@ -29,7 +29,7 @@ export default class Gallery extends Component {
   render() {
     return (
       <div>
-        <Header />
+    
         <Container>
           <Row className="gallery">
             {this.state.Apidata.map((elem, key) => {
@@ -47,6 +47,7 @@ export default class Gallery extends Component {
             })}
           </Row>
         </Container>
+        
       </div>
     );
   }

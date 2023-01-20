@@ -28,7 +28,6 @@ export default class MobileGallery extends Component {
   render() {
     return (
       <div>
-        <Header />
         <Container>
           <Row className="Mobilegallery">
             {this.state.Apidata.map((elem, key) => {
