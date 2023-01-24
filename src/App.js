@@ -4,7 +4,7 @@ import ImageView from "./components/imageView";
 import MobileGallery from "./components/mobileGallery";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/header";
-import Cards from "./components/card";
+// import Cards from "./components/card";
 import Admin from "./Admin";
 import MobileView from "./components/mobileView";
 
@@ -13,7 +13,6 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
-        <Route exact path="/test" element={<Cards />} />
         <Route exact path="/" element={<Gallery />} />
         <Route exact path="/mobile" element={<MobileGallery />} />
         <Route exact path="/admin" element={<Admin />} />
