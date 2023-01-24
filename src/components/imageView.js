@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import withRouter from "./withRouter";
 
 class ImageView extends Component {
@@ -27,10 +27,8 @@ class ImageView extends Component {
   //   this.setState({ Apidata: data });
   // };
   render() {
-
     return (
       <div>
-        
         <Container className="main">
           <Row className="justify-content-center" style={{ padding: 0 }}>
             <img
