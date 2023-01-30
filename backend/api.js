@@ -9,11 +9,8 @@ const path = require("path");
 const cors = require("cors");
 const bycrypt = require("bcryptjs");
 const { response } = require("express");
-// app.use(express.json());
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(express.json());
-// app.use(express.urlencoded());
+const fs = require("fs");
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -42,6 +39,7 @@ const wallpaperschema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  status: { type: String }
 });
 
 const Wallpaper = mongoose.model("wals", wallpaperschema);
@@ -107,6 +105,7 @@ app.post("/upload", upload.single("wallls"), async (req, res, next) => {
     name: req.body.name,
     category: req.body.category,
     wallpaper_url: req.file.filename,
+    status: "unApproved",
     uploadedby: user,
     count: 0,
   });
@@ -118,9 +117,6 @@ app.post("/upload", upload.single("wallls"), async (req, res, next) => {
 });
 
 
-
-
-
 app.post("/upload/:userid", upload.single("wallls"), async (req, res, next) => {
   // const {name,category,wallpaper_url}
   const user = req.params.userid;
@@ -130,6 +126,7 @@ app.post("/upload/:userid", upload.single("wallls"), async (req, res, next) => {
     category: req.body.category,
     wallpaper_url: req.file.filename,
     uploadedby: user,
+    status: "unApproved",
     count: 0,
   });
   newwallpaper
@@ -153,7 +150,6 @@ app.post("/upload/:userid", upload.single("wallls"), async (req, res, next) => {
 
   console.log(updateAarray);
 });
-
 
 
 app.post("/view/:name", async (req, res) => {
@@ -220,6 +216,44 @@ app.post("/deleteall", async (req, res) => {
   console.log(data);
   res.send(data);
 });
+
+app.post("/status/:id", async (req, res) => {
+  let wallpaperId = req.params.id;
+  var wallpaper_id = { _id: wallpaperId };
+  const data = await Wallpaper.findOneAndUpdate(wallpaper_id,
+  { status: 'Approved' },
+  
+    {
+      returnOriginal: false,
+    });
+  console.log(data);
+  res.send(data);
+});
+
+
+
+
+
+
+app.post("/delete/:id", async (req, res) => {
+  let wallpaperId = req.params.id;
+  
+  const data = await Wallpaper.findOne({ _id: wallpaperId });
+  var WallpaperResponse = data.wallpaper_url;
+  
+  fs.unlink("../public/uploads/" + WallpaperResponse, (err) => {
+    if (err) throw err;
+    console.log("successfully deleted file");
+  });
+
+
+  const deletdatabase = await Wallpaper.deleteOne({ _id: wallpaperId });
+ console.log(deletdatabase);
+ res.send(deletdatabase);
+
+});
+
+
 
 app.listen(PORT, () => {
   console.log(`server is runnig at port no ${PORT}`);
