@@ -8,27 +8,29 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import withRouter from "./withRouter";
+import axios from "axios";
 
 class ImageView extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     Apidata: [],
-  //   };
-  // }
-  // componentDidMount() {
-  //   const id = "63c6430e1f0e4e2d2ec6d715";
-  //   this.getData(id);
-  // }
-
-  // getData = async (id) => {
-  //   const res = await axios.get(`http://localhost:3001/view/${id}`);
-  //   const data = await res.data;
-  //   this.setState({ Apidata: data });
-  // };
+  constructor() {
+    super();
+    this.state = {
+      views: "",
+    };
+  }
+  componentDidMount() {
+    this.updateViews();
+  }
+  updateViews = async () => {
+    const getCount = await axios.post(
+      `http://localhost:3001/view/${this.props.params.wallpaper_url}`
+    );
+    const data = getCount.data;
+    this.setState({ views: data.count });
+  };
   render() {
     return (
       <div>
+        <h1>{this.state.views }</h1>
         <Container className="main">
           <Row className="justify-content-center" style={{ padding: 0 }}>
             <img

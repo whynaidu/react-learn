@@ -7,16 +7,16 @@ import Header from "./components/header";
 // import Cards from "./components/card";
 import Admin from "./Admin";
 import MobileView from "./components/mobileView";
+import Dashboard from "./components/dashboard";
 
 function App() {
   return (
     <div className="App">
-      <Header />
       <Routes>
         <Route exact path="/" element={<Gallery />} />
         <Route exact path="/mobile" element={<MobileGallery />} />
         <Route exact path="/admin" element={<Admin />} />
-        <Route exact path="/dashboard" element={<Admin />} />
+        <Route exact path="/dashboard" element={<Dashboard />} />
 
         <Route path="/view/:wallpaper_url" element={<ImageView />} />
         <Route path="/mobileview/:wallpaper_url" element={<MobileView />} />

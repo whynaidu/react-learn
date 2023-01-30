@@ -15,13 +15,14 @@ import "../App.css";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {useNavigate} from "react-router-dom"
+// import withNavigateHook from "./withNavigate";
 
 
 
-export default class AdminLogin extends Component {
+class AdminLogin extends Component {
   constructor(props) {
     super(props);
 
@@ -29,6 +30,7 @@ export default class AdminLogin extends Component {
       adminemail: "",
       password: "",
       token: "",
+      isLoggedIn: false,
     };
   }
 
@@ -43,7 +45,12 @@ export default class AdminLogin extends Component {
     });
   };
 
-  handleButtonClicked = (click) => {
+  componentDidMount() {
+    this.setState({
+      isLoggedIn: false,
+    });
+  }
+  handleButtonClicked = async (click) => {
     click.preventDefault();
 
     axios
@@ -57,19 +64,43 @@ export default class AdminLogin extends Component {
       )
       .then((res) => {
         toast.success(res.data);
-        console.log(res.data.token);
-        window.localStorage.setItem("token", res.data.token);
-        this.setState({token: res.data.token});
 
-        let navigate = useNavigate();
-        navigate("/dashboard");
+        // const data = res.json();
+        console.log(res.data);
+        // if (res.status === 400 || !data) {
+        //   window.alert("invalid login");
+        // } else {
+        //   window.alert("success");
+        //   navigation("/dashboard");
+        // }
+        this.setState({ isLoggedIn: true });
+        this.setState({ token: res.data.token });
+        window.localStorage.setItem("token", res.data.token);
+
+        // if (this.state.token) {
+        //   this.setState({ isLoggedIn: false });
+        // } else {
+        //   this.setState({ isLoggedIn: true });
+        // }
+
+        // if (this.state.isLoggedIn === true) {
+        //   // redirect to dashboard page if user is logged in
+        //   this.props.navigation("/dashboard");
+        // } else {
+        //   // do not redirect if user is not logged in
+        // }
       })
       .catch((err) => {
         toast.error(err);
       });
-  };
+  }; 
 
   render() {
+  
+    
+      if (this.state.isLoggedIn) {
+        return <Navigate to="/dashboard" state={this.state.isLoggedIn} />;
+      }
     return (
       <div>
         <Container className="x">
@@ -99,7 +130,10 @@ export default class AdminLogin extends Component {
                 <Row className="loginForm">
                   <img className="loginAvatar" src={LoginAvatar} />
                   <h1>Admin Login</h1>
-                  <Form style={{ marginTop: "40px" }}>
+                  <Form
+                    style={{ marginTop: "40px" }}
+                    onSubmit={this.handleButtonClicked}
+                  >
                     <Form.Group>
                       <FloatingLabel
                         controlId="floatingInput"
@@ -129,13 +163,13 @@ export default class AdminLogin extends Component {
                     </Form.Group>
                     <Form.Group>
                       <Button
+                        type="submit"
                         style={{
                           backgroundColor: "#a50df1",
                           border: 0,
                           width: "100%",
                         }}
                         size="lg"
-                        onClick={this.handleButtonClicked}
                       >
                         Login
                       </Button>
@@ -160,3 +194,8 @@ export default class AdminLogin extends Component {
     );
   }
 }
+export default AdminLogin;
+
+
+
+//dont redirect if user not logged in by checking localstorage for token and redirect to dashboard if token is present reactjs class component

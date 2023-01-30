@@ -8,6 +8,7 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const bycrypt = require("bcryptjs");
+const { response } = require("express");
 // app.use(express.json());
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,6 +32,16 @@ const wallpaperschema = new mongoose.Schema({
   wallpaper_url: {
     type: String,
   },
+  count: {
+    type: Number,
+  },
+  uploadedby: {
+    type: String,
+  },
+  uploadedat: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Wallpaper = mongoose.model("wals", wallpaperschema);
@@ -45,6 +56,9 @@ const adminSchema = new mongoose.Schema({
   },
   name: {
     type: String,
+  },
+  mywallpapers: {
+    type: [String],
   },
   tokens: [
     {
@@ -68,8 +82,6 @@ adminSchema.methods.generateAuthToken = async function () {
 
 const admin = mongoose.model("adminUser", adminSchema);
 
-
-
 const PORT = process.env.PORT;
 
 const Storage = multer.diskStorage({
@@ -86,26 +98,77 @@ const upload = multer({
   storage: Storage,
 });
 
-app.post("/upload", upload.single("wallls"), (req, res) => {
+
+app.post("/upload", upload.single("wallls"), async (req, res, next) => {
+  // const {name,category,wallpaper_url}
+    const user = req.params.userid;
+
   const newwallpaper = new Wallpaper({
     name: req.body.name,
     category: req.body.category,
     wallpaper_url: req.file.filename,
+    uploadedby: user,
+    count: 0,
   });
   newwallpaper
     .save()
-    .then(() => res.send("WallPaper Uploaded"))
+    .then(() => res.send(newwallpaper))
     .catch((err) => res.send(err));
+
+});
+
+
+
+
+
+app.post("/upload/:userid", upload.single("wallls"), async (req, res, next) => {
+  // const {name,category,wallpaper_url}
+  const user = req.params.userid;
+
+  const newwallpaper = new Wallpaper({
+    name: req.body.name,
+    category: req.body.category,
+    wallpaper_url: req.file.filename,
+    uploadedby: user,
+    count: 0,
+  });
+  newwallpaper
+    .save()
+    .then(() => res.send(newwallpaper))
+    .catch((err) => res.send(err));
+  const wallpaper_id = newwallpaper._id.toHexString();
+  console.log(wallpaper_id);
+
+  const updateAarray = await admin.findOneAndUpdate(
+    { _id: user },
+    {
+      $push: {
+        mywallpapers: wallpaper_id,
+      },
+    },
+    {
+      returnOriginal: false,
+    }
+  );
+
+  console.log(updateAarray);
+});
+
+
+
+app.post("/view/:name", async (req, res) => {
+  const name = req.params.name;
+
+  const views = await Wallpaper.updateOne(
+    { wallpaper_url: name },
+    { $inc: { count: 1 } }
+  );
+  const getviews = await Wallpaper.findOne({ wallpaper_url: name });
+  res.send(getviews);
 });
 
 app.get("/:category", async (req, res) => {
   const data = await Wallpaper.find({ category: req.params.category });
-  console.log(data);
-  res.send(data);
-});
-
-app.get("/view/:id", async (req, res) => {
-  const data = await Wallpaper.find({ _id: req.params.id });
   console.log(data);
   res.send(data);
 });
@@ -116,7 +179,6 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-
   try {
     const { adminemail, password } = req.body;
 
@@ -125,36 +187,28 @@ app.post("/login", async (req, res) => {
     }
 
     const userLogin = await admin.findOne({ email: adminemail });
-   
 
     if (userLogin) {
       const isMatch = await bycrypt.compare(password, userLogin.password);
+
       const token = await userLogin.generateAuthToken();
       console.log(token);
-    
 
-       res.cookie("login_token", token, {
-         expires: new Date(Date.now() + 25892000000),
-         httpOnly: true,
-       });
-      
+      res.cookie("login_token", token, {
+        expires: new Date(Date.now() + 25892000000),
+        httpOnly: true,
+      });
 
       if (!isMatch) {
-
-        res.send("user error");
-        
-
-
+        res.status(400).json({ error: "user error" });
       } else {
-         
         res.send({
           message: "user login sucesss",
-          token:token
+          token: token,
         });
-
       }
     } else {
-      res.send("Invalid Credentials");
+      res.status(400).json({ error: "Invalid Credentials" });
     }
   } catch (err) {
     console.log(err);

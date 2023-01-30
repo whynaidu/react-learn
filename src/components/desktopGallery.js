@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
-// import Header from "./header";
+import Header from "./header";
 // import Button from "react-bootstrap/Button";
 // import Modal from "react-bootstrap/Modal";
  import { Link } from "react-router-dom";
@@ -13,6 +13,7 @@ export default class Gallery extends Component {
   constructor() {
     super();
     this.state = {
+      image: "",
       Apidata: [],
     };
   }
@@ -29,7 +30,7 @@ export default class Gallery extends Component {
   render() {
     return (
       <div>
-    
+        <Header />
         <Container>
           <Row className="gallery">
             {this.state.Apidata.map((elem, key) => {
@@ -47,7 +48,6 @@ export default class Gallery extends Component {
             })}
           </Row>
         </Container>
-        
       </div>
     );
   }
