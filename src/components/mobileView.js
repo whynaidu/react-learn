@@ -32,7 +32,7 @@ class MobileView extends Component {
   render() {
     return (
       <div>
-        <Container className="main">
+        <Container className="mainMobile">
           <Row className="justify-content-center" style={{ padding: 0 }}>
             <img
               className="mobileView"

@@ -8,22 +8,32 @@ html{
     margin-bottom: 24px;
 }
 .tools{
-  padding-top:80px ;
-  text-align: end;
+ display: flex;
+ align-items: center;
+ justify-content:flex-end ;
 }
+
+
 .MobileWallpaper{
     height: 500px;
     border-radius:10px ;
     margin-bottom: 24px;
 
 }
+.logo{
+  display: flex;
+  justify-content: center;
+}
 #upload{
   cursor: pointer;
   display: none;
 }
-.main{
+.mainDesktop{
+  height: 100vh;
   padding: 3%;
-  height: 750px;
+}
+.mainMobile{
+  padding: 2%;
 }
 
 .imageView{
@@ -36,11 +46,11 @@ html{
 }
 .mobileView{
   padding:0;
-  width: 30%;
+  width: 35%;
   box-shadow: 0px 0px 10px  rgb(72, 70, 70); 
   border-radius: 20px;
   background-color: aqua;
-  height: 700px;
+  height: 90vh;
 }
 .wallpaper_tool{
   display: block;
@@ -93,7 +103,34 @@ html{
   margin-right: auto;
   width: 90%;
 }
-.logo{
-  height:150px;
-  width: auto;
+
+@media only screen and (max-width: 780px) {
+  .tools{
+    justify-content: center;
+  }
+  .mobileView{
+
+    width: 90%;
+  }
+  .imageView{
+    width: 90%;
+    height: fit-content;
+  }
+  .mainDesktop{
+    display: flex;
+    align-items: center;
+  }
+  .wallpaper_tool{
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+}
+.download{
+  padding:0;
+  font-size: 15px;
+  width: 50px;
+  height: 50px;
+}
+
+
 }

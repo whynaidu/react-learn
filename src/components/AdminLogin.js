@@ -12,7 +12,7 @@ import Logo from "../assets/logo.png";
 import LogoImage from "../assets/loginImage.png";
 import LoginAvatar from "../assets/loginAvatar.png";
 import "../App.css";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
@@ -118,7 +118,7 @@ class AdminLogin extends Component {
             />
           </div>
           <Row style={{ justifyContent: "center", height: "80px" }}>
-            <img className="logo" src={Logo} />
+            <img className="logo" src={Logo} alt=""/>
           </Row>
           <Card className="loginCard">
             <Row>
@@ -189,7 +189,7 @@ class AdminLogin extends Component {
             </Row>
           </Card>
         </Container>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

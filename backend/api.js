@@ -37,7 +37,7 @@ const wallpaperschema = new mongoose.Schema({
   },
   uploadedat: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
   status: { type: String }
 });

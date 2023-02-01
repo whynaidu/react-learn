@@ -30,8 +30,7 @@ class ImageView extends Component {
   render() {
     return (
       <div>
-        <h1>{this.state.views }</h1>
-        <Container className="main">
+        <Container className="mainDesktop">
           <Row className="justify-content-center" style={{ padding: 0 }}>
             <img
               className="imageView"

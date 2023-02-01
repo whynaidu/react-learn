@@ -67,18 +67,12 @@ class Header extends Component {
     });
   };
 
-  handleChangeDesktop = (e) => {
-    this.setState({
-      mobile: false,
-    });
-  };
+  componentDidMount() {
+  this.setState({
+    page:this.props.params.mobile ,
+  });
 
-  handleChangeMobile = (e) => {
-    this.setState({
-      mobile: true,
-    });
-  };
-
+}
 
 
   openModal = () => this.setState({ showModal: true });
@@ -110,8 +104,8 @@ class Header extends Component {
         </div>
         <Row>
           <Col></Col>
-          <Col lg={3} className="logo">
-            <img src={Logo} alt="logo" />
+          <Col md={6} lg={6} className="logo">
+            <img src={Logo} className="img-fluid" alt="logo" />
           </Col>
           <Col className="tools">
             <FontAwesomeIcon
