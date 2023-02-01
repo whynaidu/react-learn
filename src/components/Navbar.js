@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import Logo from "../assets/SidebarLogo.png";
 import { Sidebar } from "react-pro-sidebar";
-
-import { ProSidebarProvider, Menu, SubMenu, MenuItem, useProSidebar} from "react-pro-sidebar";
-
+import { ProSidebarProvider, Menu, MenuItem} from "react-pro-sidebar";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
@@ -27,7 +25,7 @@ export default class Navbar extends Component {
           <ProSidebarProvider>
             <Sidebar>
               <div style={{ textAlign: "center" }}>
-                <img src={Logo} />
+                <img src={Logo} alt="logo" />
               </div>
 
               <Menu

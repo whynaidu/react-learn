@@ -13,6 +13,7 @@ export default class Gallery extends Component {
     super();
     this.state = {
       image: false,
+
       Apidata: [],
     };
   }
@@ -21,6 +22,7 @@ export default class Gallery extends Component {
     setTimeout(async () => {
       const res = await axios.get("http://localhost:3001/");
       const data = await res.data;
+      console.log(data.length)
       this.setState({ Apidata: data });
       this.setState({ image: true });
     }, 1000);
