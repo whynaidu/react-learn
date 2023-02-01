@@ -96,7 +96,6 @@ const upload = multer({
   storage: Storage,
 });
 
-
 app.post("/upload", upload.single("wallls"), async (req, res, next) => {
   // const {name,category,wallpaper_url}
     const user = req.params.userid;
@@ -115,7 +114,6 @@ app.post("/upload", upload.single("wallls"), async (req, res, next) => {
     .catch((err) => res.send(err));
 
 });
-
 
 app.post("/upload/:userid", upload.single("wallls"), async (req, res, next) => {
   // const {name,category,wallpaper_url}
@@ -170,7 +168,7 @@ app.get("/:category", async (req, res) => {
 });
 
 app.get("/", async (req, res) => {
-  const data = await Wallpaper.find({ category: "desktop" });
+  const data = await Wallpaper.find({ category: "desktop" }).sort({ _id: -1 });  
   res.send(data);
 });
 
@@ -230,11 +228,6 @@ app.post("/status/:id", async (req, res) => {
   res.send(data);
 });
 
-
-
-
-
-
 app.post("/delete/:id", async (req, res) => {
   let wallpaperId = req.params.id;
   
@@ -252,8 +245,6 @@ app.post("/delete/:id", async (req, res) => {
  res.send(deletdatabase);
 
 });
-
-
 
 app.listen(PORT, () => {
   console.log(`server is runnig at port no ${PORT}`);

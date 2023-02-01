@@ -5,39 +5,44 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
 import Header from "./header";
-// import Button from "react-bootstrap/Button";
-// import Modal from "react-bootstrap/Modal";
- import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Skeleton } from "@mui/material";
 
 export default class Gallery extends Component {
   constructor() {
     super();
     this.state = {
-      image: "",
+      image: false,
       Apidata: [],
     };
   }
 
   componentDidMount() {
-    const getData = async () => {
+    setTimeout(async () => {
       const res = await axios.get("http://localhost:3001/");
       const data = await res.data;
       this.setState({ Apidata: data });
-    };
-    getData();
+      this.setState({ image: true });
+    }, 1000);
   }
-
+  // componentDidUpdate(prevState) {
+  //   if (prevState.Apidata !== this.state.Apidata) {
+  //     axios.get("http://localhost:3001/")
+  //       .then(res => { this.setState({ Apidata: res.data }).catch(err => { console.log(err) }) })
+  //   }
+  // }
   render() {
     return (
       <div>
         <Header />
         <Container>
-          <Row className="gallery">
+          <Row className="gallery d-flex flex-wrap">
             {this.state.Apidata.map((elem, key) => {
               return (
-                <Col xs={6} md={4} key={elem._id}>
+                <Col md={6} lg={4}>
                   <Link to={`view/${elem.wallpaper_url}`}>
                     <Card.Img
+                      key={key._id}
                       className="wallpaper"
                       variant="top"
                       src={`../../uploads/${elem.wallpaper_url}`}
@@ -46,7 +51,16 @@ export default class Gallery extends Component {
                 </Col>
               );
             })}
+
+            {!this.state.image &&
+              [1, 2, 3, 4, 5,6,7,8,9,11,12].map(() => (
+                  <Col md={6} lg={4}>
+                    <Skeleton sx={{marginBottom:"24px"}} variant="rounded" animation="wave" height={240} />
+                  </Col>
+              ))}
           </Row>
+
+         
         </Container>
       </div>
     );

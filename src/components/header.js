@@ -7,41 +7,15 @@ import Form from "react-bootstrap/Form";
 import withRouter from "./withRouter";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMobile } from "@fortawesome/free-solid-svg-icons";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-
-// import { faCloudMoon } from '@fortawesome/free-solid-svg-icons'
-
+import { faDesktop } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../assets/logo.png";
 import axios from "axios";
 
 class Header extends Component {
-  // renderHeader = (path) => {
-  //   switch (path) {
-  //     case "loader":
-  //       return (
-  //         <FontAwesomeIcon
-  //           for=""
-  //           style={{ color: "black", margin: 10 }}
-  //           icon={faCirclePlus}
-  //           size="3x"
-  //         />
-  //       );
-
-  //     default:
-  //       return (
-  //         <FontAwesomeIcon
-  //           for="mobile"
-  //           style={{ color: "black", margin: 10 }}
-  //           icon={faMobile}
-  //           size="3x"
-  //         />
-  //       );
-  //   }
-  // };
   constructor(props) {
     super(props);
 
@@ -49,6 +23,7 @@ class Header extends Component {
       name: "",
       category: "",
       wallls: "",
+      page:"",
       showModal: false,
     };
   }
@@ -70,7 +45,6 @@ class Header extends Component {
       .post(`http://localhost:3001/upload/`, formData)
       .then((res) => {
         toast.success(res.data);
-        console.log(res);
       })
       .catch((err) => {
         toast.error(err);
@@ -93,12 +67,19 @@ class Header extends Component {
     });
   };
 
-  // handleFile = (e) => {
-  //   this.setState({
-  //     fileName: e.target.files[0],
-  //   });
-  //   console.log(this.state.fileName[0]);
-  // };
+  handleChangeDesktop = (e) => {
+    this.setState({
+      mobile: false,
+    });
+  };
+
+  handleChangeMobile = (e) => {
+    this.setState({
+      mobile: true,
+    });
+  };
+
+
 
   openModal = () => this.setState({ showModal: true });
 
@@ -140,14 +121,25 @@ class Header extends Component {
               size="3x"
             />
 
-            <Link to="/mobile">
-              <FontAwesomeIcon
-                style={{ color: "black", margin: 10, cursor: "pointer" }}
-                onClick={this.openModal}
-                icon={faMobile}
-                size="3x"
-              />
-            </Link>
+            {this.state.page === "mobile" ? (
+              <Link to="/">
+                <FontAwesomeIcon
+                  style={{ color: "black", margin: 10, cursor: "pointer" }}
+                  onClick={this.handleChangeDesktop}
+                  icon={faDesktop}
+                  size="3x"
+                />
+              </Link>
+            ) : (
+              <Link to="/mobile">
+                <FontAwesomeIcon
+                  style={{ color: "black", margin: 10, cursor: "pointer" }}
+                  onClick={this.handleChangeMobile}
+                  icon={faMobile}
+                  size="3x"
+                />
+              </Link>
+            )}
           </Col>
           <Col sm={1} md={1} xs={0}></Col>
 
@@ -161,7 +153,10 @@ class Header extends Component {
             <Modal.Header closeButton>
               <Modal.Title>Upload Wallpaper</Modal.Title>
             </Modal.Header>
-            <Form encType="mutipart/form-data">
+            <Form
+              encType="mutipart/form-data"
+              onSubmit={this.handleButtonClicked}
+            >
               <Modal.Body>
                 <Form.Group
                   as={Row}
@@ -232,11 +227,7 @@ class Header extends Component {
                 <Button variant="secondary" onClick={this.closeModal}>
                   Close
                 </Button>
-                <Button
-                  type="submit"
-                  variant="dark"
-                  onClick={this.handleButtonClicked}
-                >
+                <Button variant="dark" onClick={this.handleButtonClicked}>
                   Upload
                 </Button>
               </Modal.Footer>
