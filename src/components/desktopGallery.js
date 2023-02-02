@@ -21,7 +21,7 @@ export default class Gallery extends Component {
 
   componentDidMount() {
     setTimeout(async () => {
-      const res = await axios.get("http://localhost:3001/");
+      const res = await axios.get("https://wallly.onrender.com/");
       const data = await res.data;
       console.log(data.length)
       this.setState({ Apidata: data });

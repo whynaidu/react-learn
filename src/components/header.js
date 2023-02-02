@@ -42,7 +42,7 @@ class Header extends Component {
     formData.append("category", this.state.category);
 
     axios
-      .post(`http://localhost:3001/upload/`, formData)
+      .post(`https://wallly.onrender.com/upload/`, formData)
       .then((res) => {
         toast.success(res.data);
       })

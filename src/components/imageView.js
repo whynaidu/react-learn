@@ -22,7 +22,7 @@ class ImageView extends Component {
   }
   updateViews = async () => {
     const getCount = await axios.post(
-      `http://localhost:3001/view/${this.props.params.wallpaper_url}`
+      `https://wallly.onrender.com/view/${this.props.params.wallpaper_url}`
     );
     const data = getCount.data;
     this.setState({ views: data.count });

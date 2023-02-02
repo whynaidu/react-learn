@@ -22,7 +22,7 @@ export default class MobileGallery extends Component {
 
   componentDidMount() {
       setTimeout(async () => {
-      const res = await axios.get("http://localhost:3001/mobile");
+      const res = await axios.get("https://wallly.onrender.com/mobile");
       const data = await res.data;
       console.log(res.data);
       this.setState({ Apidata: data });
