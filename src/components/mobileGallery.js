@@ -22,13 +22,13 @@ export default class MobileGallery extends Component {
 
   componentDidMount() {
       setTimeout(async () => {
-      const res = await axios.get("http://localhost:3001/mobile");
+      const res = await axios.get("https://wallly.onrender.com/mobile");
       const data = await res.data;
       console.log(res.data);
       this.setState({ Apidata: data });
       this.setState({ image: true });
 
-    },800)
+    },100)
   }
   render() {
     return (
@@ -38,7 +38,7 @@ export default class MobileGallery extends Component {
           <Row className="Mobilegallery">
             {this.state.Apidata.map((elem, key) => {
               return (
-                <Col md={6} lg={3}>
+                <Col md={6} lg={3} key={key}>
                   <Link to={`../mobileview/${elem.wallpaper_url}`}>
                     <Card.Img
                       className="MobileWallpaper"
