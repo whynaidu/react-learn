@@ -96,7 +96,7 @@ const upload = multer({
   storage: Storage,
 });
 
-app.post("/upload", upload.single("wallls"), async (req, res, next) => {
+app.post("/upload", upload.single("wallls"), async (req, res) => {
   // const {name,category,wallpaper_url}
     const user = req.params.userid;
 
