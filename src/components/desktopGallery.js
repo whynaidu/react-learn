@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+// import { LazyLoadImage } from "react-lazy-load-image-component";
 import axios from "axios";
 import Header from "./header";
 import { Link } from "react-router-dom";
@@ -26,7 +26,7 @@ export default class Gallery extends Component {
       console.log(data.length)
       this.setState({ Apidata: data });
       this.setState({ image: true });
-    }, 1000);
+    }, 800);
   }
   // componentDidUpdate(prevState) {
   //   if (prevState.Apidata !== this.state.Apidata) {
@@ -44,7 +44,7 @@ export default class Gallery extends Component {
               return (
                 <Col md={6} lg={4}>
                   <Link to={`view/${elem.wallpaper_url}`}>
-                    <Card.LazyLoadImage
+                    <Card.Img
                       key={key._id}
                       className="wallpaper"
                       variant="top"

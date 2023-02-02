@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMobile } from "@fortawesome/free-solid-svg-icons";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+// import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { faDesktop } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../assets/logo.png";
@@ -108,12 +108,12 @@ class Header extends Component {
             <img src={Logo} className="img-fluid" alt="logo" />
           </Col>
           <Col className="tools">
-            <FontAwesomeIcon
+            {/* <FontAwesomeIcon
               style={{ color: "black", margin: 10, cursor: "pointer" }}
               onClick={this.openModal}
               icon={faCirclePlus}
               size="3x"
-            />
+            /> */}
 
             {this.state.page === "mobile" ? (
               <Link to="/">

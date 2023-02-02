@@ -28,7 +28,7 @@ export default class MobileGallery extends Component {
       this.setState({ Apidata: data });
       this.setState({ image: true });
 
-    },1000)
+    },800)
   }
   render() {
     return (
