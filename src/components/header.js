@@ -12,7 +12,8 @@ import { faMobile } from "@fortawesome/free-solid-svg-icons";
 // import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { faDesktop } from "@fortawesome/free-solid-svg-icons";
-import Logo from "../assets/logo.png";
+import { faW } from "@fortawesome/free-solid-svg-icons";
+import Logo from "../assets/logo1.svg";
 import axios from "axios";
 
 class Header extends Component {
@@ -105,6 +106,13 @@ class Header extends Component {
         <Row>
           <Col></Col>
           <Col md={6} lg={6} className="logo">
+            <FontAwesomeIcon
+                  style={{ color: "black", margin: 10, cursor: "pointer" }}
+                  onClick={this.handleChangeDesktop}
+                  icon={ faW}
+                  size="3x"
+                />
+            
             <img src={Logo} className="img-fluid" alt="logo" />
           </Col>
           <Col className="tools">
@@ -114,6 +122,11 @@ class Header extends Component {
               icon={faCirclePlus}
               size="3x"
             /> */}
+
+            <dark-mode-toggle
+    id="dark-mode-toggle-2"
+    
+  ></dark-mode-toggle>
 
             {this.state.page === "mobile" ? (
               <Link to="/">

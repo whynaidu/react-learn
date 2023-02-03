@@ -39,7 +39,7 @@ class ImageView extends Component {
             />
             <Row className="wallpaper_tool">
               <Link to="/">
-                <Button variant="light" className="download" size="lg">
+                <Button className="download" size="lg">
                   <FontAwesomeIcon icon={faClose} size="2x" />
                 </Button>
               </Link>
@@ -48,7 +48,7 @@ class ImageView extends Component {
                 href={`../../uploads/${this.props.params.wallpaper_url}`}
                 download
               >
-                <Button variant="light" className="download" size="lg">
+                <Button className="download" size="lg">
                   <FontAwesomeIcon icon={faDownload} size="2x" />
                 </Button>
               </a>

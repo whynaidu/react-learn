@@ -17,7 +17,6 @@ function App() {
         <Route exact path="/:mobile" element={<MobileGallery />} />
         <Route exact path="/admin" element={<Admin />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
-
         <Route path="/view/:wallpaper_url" element={<ImageView />} />
         <Route path="/mobileview/:wallpaper_url" element={<MobileView />} />
         <Route path="*" element={<Gallery />} />
