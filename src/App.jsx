@@ -7,8 +7,8 @@ import "./App.css"
 function App() {
 
   return (
-    <div classNameName="App">
-   <Header/>
+    <div className="App">
+      <Header/>
       <Desktop />
       <Mobile/>
    

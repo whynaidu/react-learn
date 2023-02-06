@@ -1,12 +1,31 @@
 .__react_modal_image__header{
 
   background-color:transparent !important;
-  top: 650px !important;
+  top: 640px !important;
 }
+.__react_modal_image__medium_img{
 
+  border-radius: 16px !important;
+}
 .__react_modal_image__icon_menu{
+  padding:6px 0 10px 0;
   font-size: large;
   display: flex !important;
   float: none !important;
   justify-content: center !important;
+}
+.__react_modal_image__modal_content{
+
+      backdrop-filter: blur(10px);
+}
+
+.__react_modal_image__icon_menu a svg{
+  fill: black;
+  /* color: black !important; */
+  padding: 8px !important;
+box-shadow: 0px 0px 9px rgb(178, 177, 177) !important;
+  border-radius: 100%;
+height: 50px;
+width: 50px;
+background-color: rgb(255, 255, 255) !important;
 }
