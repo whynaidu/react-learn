@@ -42,7 +42,7 @@ const wallpaperschema = new mongoose.Schema({
   status: { type: String }
 });
 
-const Wallpaper = mongoose.model("wals", wallpaperschema);
+const Wallpaper = mongoose.model("wallpaper", wallpaperschema);
 
 const adminSchema = new mongoose.Schema({
   email: {
@@ -97,15 +97,13 @@ const upload = multer({
 });
 
 app.post("/upload", upload.single("wallls"), async (req, res) => {
-  // const {name,category,wallpaper_url}
-    const user = req.params.userid;
 
   const newwallpaper = new Wallpaper({
     name: req.body.name,
     category: req.body.category,
     wallpaper_url: req.file.filename,
     status: "unApproved",
-    uploadedby: user,
+    uploadedby: req.body.uploadedbyuser,
     count: 0,
   });
   newwallpaper
@@ -115,10 +113,10 @@ app.post("/upload", upload.single("wallls"), async (req, res) => {
 
 });
 
-app.post("/upload/:userid", upload.single("wallls"), async (req, res, next) => {
-  // const {name,category,wallpaper_url}
-  const user = req.params.userid;
 
+
+app.post("/upload/:userid", upload.single("wallls"), async (req, res, next) => {
+  const user = req.params.userid;
   const newwallpaper = new Wallpaper({
     name: req.body.name,
     category: req.body.category,
