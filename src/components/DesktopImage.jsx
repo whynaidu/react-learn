@@ -7,9 +7,9 @@ export default class DesktopImage extends Component {
     return (
       <div>
         <ModalImage
-          className="w-full rounded-lg border-2 border-solid border-sky-500 object-cover"
-          small="https://cdn.pixabay.com/photo/2022/10/16/13/17/road-7525092_960_720.jpg"
-          large="https://cdn.pixabay.com/photo/2022/10/16/13/17/road-7525092_960_720.jpg"
+          className="w-full h-64 rounded-lg border-2 border-solid border-sky-500 object-cover"
+          small={`../uploads/${this.props.url}`}
+          large={`../uploads/${this.props.url}`}
           hideZoom={true}
         />
       </div>

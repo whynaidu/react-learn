@@ -1,6 +1,8 @@
 import Desktop from "./components/Desktop"
 import Header from "./components/Header"
 import Mobile from "./components/Mobile"
+import { Routes, Route } from "react-router";
+
 import "./App.css"
 
 
@@ -8,12 +10,14 @@ function App() {
 
   return (
     <div className="App">
-      <Header/>
-      <Desktop />
-      <Mobile/>
-   
+      <Header />
+      <Routes>
+        <Route exact path="/" element={<Desktop />} />
+        <Route path="/:mobile" element={<Mobile />} />
+        <Route path="*" element={<Desktop />} />
+      </Routes>
     </div>
-  )
+  );
 }
 
 export default App
