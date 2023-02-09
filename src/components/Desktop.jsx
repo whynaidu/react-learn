@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DesktopImage from "./DesktopImage";
 import axios from 'axios';
 import { Skeleton } from "@mui/material";
+import Header from './Header';
 
 
 
@@ -27,6 +28,8 @@ export default class Desktop extends Component {
   }
   render() {
     return (
+       <>
+        <Header />
       <div className="p-10">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {this.state.Apidata.map((elem, key) => {
@@ -43,7 +46,8 @@ export default class Desktop extends Component {
                 />
             ))}
         </div>
-      </div>
+        </div>
+        </>
     );
   }
 }

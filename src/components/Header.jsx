@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import withRouter from "./withRouter";
 
 import StayPrimaryPortraitIcon from "@mui/icons-material/StayPrimaryPortrait";
-
+import ComputerIcon from "@mui/icons-material/Computer";
 
 class Header extends Component {
   constructor(props) {
@@ -31,11 +31,19 @@ console.log(this.props)
             </a>
             <div className="ml-5 inline-flex lg:ml-0 lg:w-2/5 lg:justify-end">
               <div className="mr-5 hover:text-gray-900">
-                <Link to="/mobile">
-                  <StayPrimaryPortraitIcon
-                    style={{ fontSize: "40px", color: "black" }}
-                  />
-                </Link>
+                {this.state.page === "mobile" ? (
+                  <Link to="/">
+                    <ComputerIcon
+                      style={{ fontSize: "40px", color: "black" }}
+                    />
+                  </Link>
+                ) : (
+                  <Link to="/mobile">
+                    <StayPrimaryPortraitIcon
+                      style={{ fontSize: "40px", color: "black" }}
+                    />
+                  </Link>
+                )}
               </div>
             </div>
           </div>
