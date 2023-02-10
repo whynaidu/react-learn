@@ -1,7 +1,7 @@
 import Desktop from "./components/Desktop"
 import Mobile from "./components/Mobile"
 import { Routes, Route } from "react-router";
-
+import "flowbite";
 import "./App.css"
 import Upload from "./components/Upload";
 

@@ -110,7 +110,7 @@ app.post("/upload", upload.single("wallls"), async (req, res) => {
   });
   newwallpaper
     .save()
-    .then(() => res.send(newwallpaper))
+    .then(() => res.send("Wallpaper Uploaded"))
     .catch((err) => res.send(err));
 });
 

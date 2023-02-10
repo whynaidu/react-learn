@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios"
+import UploadedWallpapers from "./UploadedWallpapers";
 
 export default class Upload extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+
       WallpaperName: "",
       WallpaperCategory: "",
       wallpaperImage: "",
+      uploaded:"",
     };
   }
 
@@ -42,7 +45,8 @@ export default class Upload extends Component {
 
     axios
       .post(`http://localhost:3001/upload/`, formData)
-      .then((res) => {console.log(res.data);
+      .then((res) => {
+        this.setState({uploaded:res.data},() => console.log(this.state.uploaded));
       })
       .catch((err) => {
        console.log(res.data);
@@ -98,10 +102,10 @@ export default class Upload extends Component {
                     </label>
                     <div className="mt-1">
                       <select
-                        className="block w-full flex rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="w-full flex rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         onChange={this.handleSelect}
                       >
-                        <option disabled selected>
+                        <option disabled defaultValue>
                           Select a Category
                         </option>
                         <option value="mobile">Mobile</option>
@@ -165,6 +169,8 @@ export default class Upload extends Component {
             </form>
           </div>
         </div>
+        <UploadedWallpapers status={this.state.uploaded} />
+
       </div>
     );
   }
