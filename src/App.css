@@ -29,3 +29,24 @@ height: 50px;
 width: 50px;
 background-color: rgb(255, 255, 255) !important;
 }
+
+.loginPage{
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-image: url('../src/assets/Background.d63a681d.jpg');
+  height: 100vh;
+
+  background-repeat: no-repeat;
+}
+
+.FormContianer{
+ background-color: rgba(255, 255, 255, 0.20);
+  margin-top: auto;
+  margin-bottom: auto;
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  height: 90vh;
+  width: 170vh;
+
+}
