@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import withRouter from "./withRouter";
+import logo from "../assets/signature.png"
 
 import StayPrimaryPortraitIcon from "@mui/icons-material/StayPrimaryPortrait";
 import ComputerIcon from "@mui/icons-material/Computer";
@@ -27,7 +28,7 @@ console.log(this.props)
           <div className="container mx-auto flex flex-col flex-wrap items-center p-5 md:flex-row">
             <nav className="flex flex-wrap items-center text-base md:ml-auto lg:w-2/5"></nav>
             <a className="title-font order-first mb-4 flex items-center font-medium text-gray-900 md:mb-0 lg:order-none lg:w-1/5 lg:items-center lg:justify-center">
-              <img src="../logo-cropped.svg" style={{ height: "60px" }} />
+              <img src={logo} style={{ height: "60px" }} />
             </a>
             <div className="ml-5 inline-flex lg:ml-0 lg:w-2/5 lg:justify-end">
               <div className="mr-5 hover:text-gray-900">

@@ -114,6 +114,7 @@ app.post("/upload", upload.single("wallls"), async (req, res) => {
     .catch((err) => res.send(err));
 });
 
+
 app.post("/upload/:userid", upload.single("wallls"), async (req, res, next) => {
   // const {name,category,wallpaper_url}
   const user = req.params.userid;
@@ -144,6 +145,7 @@ app.post("/upload/:userid", upload.single("wallls"), async (req, res, next) => {
       returnOriginal: false,
     }
   );
+  
 
   console.log(updateAarray);
 });
@@ -161,7 +163,9 @@ app.post("/view/:name", async (req, res) => {
 });
 
 app.get("/:category", async (req, res) => {
-  const data = await Wallpaper.find({ category: req.params.category });
+  const data = await Wallpaper.find({ category: req.params.category }).sort({
+    _id: -1,
+  });
   console.log(data);
   res.send(data);
 });
@@ -226,6 +230,7 @@ app.post("/status/:id", async (req, res) => {
   console.log(data);
   res.send(data);
 });
+
 
 app.post("/delete/:id", async (req, res) => {
   let wallpaperId = req.params.id;
