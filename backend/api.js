@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/uploads", express.static("uploads"));
 
-app.use(cors({ credentials: true, origin: '*' }));
+app.use(cors({ credentials: true, origin: "http://localhost:5173/" }));
 require("./db/conn");
 dotenv.config({ path: "./config.env" });
 
