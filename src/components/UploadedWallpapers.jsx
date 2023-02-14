@@ -174,7 +174,7 @@ export default class UploadedWallpapers extends Component {
                 return (
                   <div key={key}>
                     <ModalImage
-                      className="h-64 w-full rounded-lg border-2 border-solid border-sky-500 object-cover"
+                      className="h-64 w-full rounded-lg border-2 border-solid"
                       small={`../uploads/${elem.wallpaper_url}`}
                       large={`../uploads/${elem.wallpaper_url}`}
                       hideZoom={true}
@@ -193,7 +193,7 @@ export default class UploadedWallpapers extends Component {
                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12].map((key) => (
                   <Skeleton
                     key={key}
-                    sx={{ marginBottom: "24px" }}
+                    sx={{ marginBottom: "10px" }}
                     variant="rounded"
                     animation="wave"
                     height={240}
@@ -212,7 +212,7 @@ export default class UploadedWallpapers extends Component {
                 return (
                   <div key={key}>
                     <ModalImage
-                      className="h-[332.53px] w-full rounded-lg border-2 border-solid border-sky-500 object-cover md:h-[494px] lg:h-[759.81px]"
+                      className="h-[332.53px] w-full rounded-lg border-2object-cover md:h-[494px] lg:h-[759.81px]"
                       small={`../uploads/${elem.wallpaper_url}`}
                       large={`../uploads/${elem.wallpaper_url}`}
                       hideZoom={true}

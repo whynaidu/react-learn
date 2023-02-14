@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios"
 import UploadedWallpapers from "./UploadedWallpapers";
 import NOImageFound from "../assets/undraw_images_re_0kll.svg" 
-
+import toast, { Toaster } from "react-hot-toast";
 
 export default class Upload extends Component {
   constructor(props) {
@@ -50,10 +50,11 @@ export default class Upload extends Component {
     axios
       .post(`http://localhost:3001/upload/`, formData)
       .then((res) => {
+        toast.success(res.data)
         this.setState({ uploaded: res.data}, () => console.log(this.state.uploaded));
       })
       .catch((err) => {
-   
+         toast.error(err);
         console.log(res.data);
       });
 
@@ -69,13 +70,16 @@ export default class Upload extends Component {
             </a>
           </div>
         </header>
+        <Toaster
+          position="top-right"
+        />
         <div className="flex justify-center">
           <div className="mt-5 w-full">
             <form
               encType="mutipart/form-data"
               onSubmit={this.handleButtonClicked}
             >
-              <div className="drop-shadow-md sm:overflow-hidden sm:rounded-md  mx-4">
+              <div className="mx-4 drop-shadow-md sm:overflow-hidden  sm:rounded-md">
                 <div className="flex flex-col lg:flex-row">
                   <div className="w-11/12 space-y-6 bg-white px-4 py-5 sm:p-6">
                     <div className="">
@@ -150,9 +154,9 @@ export default class Upload extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className="flex h-[330px] w-full justify-center">
+                  <div className="flex h-[330px] w-full items-center justify-center">
                     {this.state.file === null ? (
-                      <div className="ml-auto mr-auto max-h-64 justify-center text-center ">
+                      <div className="ml-auto mr-auto h-[205px] max-h-64 justify-center text-center ">
                         <img
                           src={NOImageFound}
                           className="h-[-webkit-fill-available] lg:w-full"
@@ -162,7 +166,7 @@ export default class Upload extends Component {
                     ) : (
                       <img
                         src={this.state.file}
-                        className=" flex rounded-md object-cover"
+                        className="flex h-[inherit] rounded-md object-cover"
                       />
                     )}
                   </div>
@@ -170,7 +174,7 @@ export default class Upload extends Component {
 
                 <div className="px-4 py-5 text-center sm:px-6">
                   <button
-                    className=" w-48 inline-flex justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className=" inline-flex w-48 justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     onClick={this.handleButtonClicked}
                   >
                     Upload

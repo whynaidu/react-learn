@@ -50,3 +50,10 @@ background-color: rgb(255, 255, 255) !important;
   width: 170vh;
 
 }
+.LazyLoad {
+  opacity: 0.2;
+  transition: all 1s ease-in-out;
+}
+.is-visible {
+  opacity: 1;
+}

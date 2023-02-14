@@ -43,6 +43,7 @@ export default class Desktop extends Component {
               {!this.state.image &&
                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12].map((key) => (
                   <Skeleton
+                    placeholder
                     key={key}
                     sx={{ marginBottom: "2px" }}
                     variant="rounded"

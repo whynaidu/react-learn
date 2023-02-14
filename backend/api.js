@@ -10,6 +10,7 @@ const cors = require("cors");
 const bycrypt = require("bcryptjs");
 const { response } = require("express");
 const fs = require("fs");
+const fse = require("fs-extra");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -214,9 +215,15 @@ app.post("/login", async (req, res) => {
 
 app.post("/deleteall", async (req, res) => {
   const data = await Wallpaper.deleteMany();
-  console.log(data);
+ fse.emptyDir("../public/uploads", (err) => {
+   if (err) return console.error(err);
+   console.log("Deleted All Successfully!");
+ });
   res.send(data);
 });
+
+
+
 
 app.post("/status/:id", async (req, res) => {
   let wallpaperId = req.params.id;
