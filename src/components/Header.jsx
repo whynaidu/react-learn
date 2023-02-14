@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import withRouter from "./withRouter";
-import logo from "../assets/signature.png"
+import logoName from "../assets/signature.png";
+import logo from "../assets/logo-cropped.svg";
+
 
 import StayPrimaryPortraitIcon from "@mui/icons-material/StayPrimaryPortrait";
 import ComputerIcon from "@mui/icons-material/Computer";

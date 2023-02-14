@@ -18,7 +18,7 @@ export default class Mobile extends Component {
 
   componentDidMount() {
     setTimeout(async () => {
-      const res = await axios.get("http://localhost:3001/mobile");
+      const res = await axios.get("https://wallly.onrender.com/mobile");
       const data = await res.data;
             this.setState({ dataPresent: data.length }, () =>
               console.log(this.state.dataPresent)

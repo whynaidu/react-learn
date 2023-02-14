@@ -1,0 +1,7 @@
+{
+  "name": "WALLY",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

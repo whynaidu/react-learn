@@ -1,0 +1,8 @@
+{
+  "appId": "io.ionic.WALLY",
+  "appName": "WALLY",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist",
+  "cordova": {}
+}

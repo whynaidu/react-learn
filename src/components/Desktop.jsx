@@ -20,7 +20,7 @@ export default class Desktop extends Component {
 
   componentDidMount() {
     setTimeout(async () => {
-      const res = await axios.get("http://localhost:3001/");
+      const res = await axios.get("https://wallly.onrender.com/");
       const data = await res.data;
       this.setState({ dataPresent: data.length },() => console.log(this.state.dataPresent));
       this.setState({ Apidata: data },()=> console.log(this.state.Apidata));
