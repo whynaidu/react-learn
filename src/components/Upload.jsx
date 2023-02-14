@@ -65,9 +65,9 @@ export default class Upload extends Component {
       <div>
         <header className="body-font text-gray-600">
           <div className="container mx-auto flex flex-col flex-wrap items-center justify-center p-5 md:flex-row">
-            <a className="title-font order-first mb-4 flex items-center font-medium text-gray-900 md:mb-0 lg:order-none lg:w-1/5 lg:items-center lg:justify-center">
+            <div className="title-font order-first mb-4 flex items-center font-medium text-gray-900 md:mb-0 lg:order-none lg:w-1/5 lg:items-center lg:justify-center">
               <img src="../logo-cropped.svg" style={{ height: "60px" }} />
-            </a>
+            </div>
           </div>
         </header>
         <Toaster
