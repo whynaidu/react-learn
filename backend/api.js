@@ -12,6 +12,7 @@ const { response } = require("express");
 const fs = require("fs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use("/uploads", express.static("uploads"));
 
 app.use(cors({ credentials: true, origin: true }));
 require("./db/conn");
@@ -84,7 +85,7 @@ const admin = mongoose.model("adminUser", adminSchema);
 const PORT = process.env.PORT;
 
 const Storage = multer.diskStorage({
-  destination: "../public/uploads",
+  destination: "uploads",
   filename: (req, file, cb) => {
     return cb(
       null,
@@ -92,6 +93,7 @@ const Storage = multer.diskStorage({
     );
   },
 });
+
 
 
 const upload = multer({
