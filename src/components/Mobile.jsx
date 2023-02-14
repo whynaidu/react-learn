@@ -36,7 +36,7 @@ export default class Mobile extends Component {
           <NoImage />
   
           :
-          <div className="p-10">
+          <div className="p-5 lg:p-10">
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
               {this.state.Apidata.map((elem, key) => {
                 return <MobileImage key={key} url={elem.wallpaper_url} />;
@@ -45,7 +45,7 @@ export default class Mobile extends Component {
                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12].map((key) => (
                   <Skeleton
                     key={key}
-                    sx={{ marginBottom: "24px" }}
+                    sx={{ marginBottom: "5px" }}
                     variant="rounded"
                     animation="wave"
                     height={500}
