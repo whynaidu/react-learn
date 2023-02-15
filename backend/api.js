@@ -222,9 +222,6 @@ app.post("/deleteall", async (req, res) => {
   res.send(data);
 });
 
-
-
-
 app.post("/status/:id", async (req, res) => {
   let wallpaperId = req.params.id;
   var wallpaper_id = { _id: wallpaperId };

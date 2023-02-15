@@ -4,7 +4,8 @@ import { Routes, Route } from "react-router";
 import "flowbite";
 import "./App.css"
 import Upload from "./components/Upload";
-import Login from "./components/Login";
+// import Login from "./components/Login";
+import MyForm from "./components/LoginCompoent";
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
         <Route exact path="/" element={<Desktop />} />
         <Route path="/:mobile" element={<Mobile />} />
         <Route path="/upload" element={<Upload />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<MyForm />} />
         <Route path="*" element={<Desktop />} />
       </Routes>
     </div>
